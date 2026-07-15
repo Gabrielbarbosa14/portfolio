@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#small-ball-div{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(68, 68, 255);
+    border-radius: 50%;
+}
+
