@@ -15,7 +15,7 @@ const smallBallsArray = Array.from(smallBalls);
 smallBallsArray.forEach((ball, index) => {
   gsap.to(ball, {
     y: -30,
-    backgroundColor: "white",
+    backgroundColor: "#F4F4F6",
     duration: 0.63,
     ease: "sine.inOut",
     repeat: 5,
@@ -26,14 +26,14 @@ smallBallsArray.forEach((ball, index) => {
         scale: 1.2,
         duration: 0.5,
         ease: "back.out(1.4)",
-        boxShadow: "0px 0px 30px white",
+        boxShadow: "0px 0px 30px #f5f5f5e2",
         backgroundColor: "white"
       });
 
       const loader = document.querySelector("#load-screen-div");
       gsap.to(loader, {
         y: -1000,
-        ease: "circ.out",
+        display: "none",
         duration: 1.5,
         delay: 0.9,
       });
