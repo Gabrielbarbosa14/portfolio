@@ -35,10 +35,28 @@ smallBallsArray.forEach((ball, index) => {
         y: -1000,
         display: "none",
         duration: 1.5,
-        delay: 0.9,
+        delay: 1
       });
     },
   });
 });
 
-window.addEventListener("load", () => {});
+gsap.to(".left-text",  {
+  x: 0,
+  scrollTrigger:{
+    trigger: ".right-text",
+    start: "top 68%",
+    end: "end 28%",
+    scrub: .4
+  }
+})
+
+gsap.to(".right-text", {
+  x: 0,
+  scrollTrigger:{
+    trigger: ".right-text",
+    start: "top 68%",
+    end: "end 28%",
+    scrub: .4
+  }
+})
