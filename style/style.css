@@ -79,14 +79,17 @@ nav{
     justify-content: space-around;
     align-items: center;
     padding-top: 20px;
+    padding-inline: 24px;
     width: 100%;
     max-width: 2440px;
     margin: auto;
+    position: relative;
     
 
     img{
         width: 40px;
         height: 40px;
+        flex-shrink: 0;
     }
 
     ul{
@@ -95,15 +98,16 @@ nav{
         width: 68%;
         justify-content: center;
         align-items: center;
-        gap: 26px;
-        font-size: 1.55em;
+        gap: clamp(10px, 1.8vw, 26px);
+        font-size: clamp(0.95rem, 1.1vw + 0.6rem, 1.55rem);
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-weight: bold;
         /* border: 1px solid black; */
         /* background-color: var(--background); */
         /* border: 1px solid #4f4f56; */
         border-radius: 12px;
-        padding: 13px 42px;
+        padding: 13px clamp(12px, 3vw, 42px);
+        flex-wrap: wrap;
 
         li{
             display: flex;
@@ -120,6 +124,7 @@ nav{
                 align-items: center;
                 justify-content: center;
                 padding: 0px 12px;
+                white-space: nowrap;
                 transition: 0.35s ease;
 
                 &:hover{
@@ -131,16 +136,18 @@ nav{
     }
 
     #github{
+        flex-shrink: 0;
 
         a{
             color: var(--text-title);
             text-decoration: none;
-            font-size: 1.3em;
+            font-size: clamp(0.9rem, 0.8vw + 0.6rem, 1.3rem);
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-weight: bold;
             background-color: #313131;
-            padding: 12px 21px;
+            padding: 10px clamp(12px, 2vw, 21px);
             border-radius: 15px;
+            white-space: nowrap;
             transition: 0.35s ease;
 
             &:hover{
@@ -148,6 +155,16 @@ nav{
                 color: var(--background);
             }
         }
+    }
+
+    #nav-toggle{
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text-title);
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 6;
     }
 }
 
@@ -176,11 +193,22 @@ nav ul li a:hover span{
 header{
     /* border: 1px solid blue; */
     margin-top: 22px;
+    position: relative;
+
+    /*
+      Escala fluida: em vez de um valor fixo (que só "parece certo" em uma
+      largura de tela específica), cada elemento cresce/encolhe junto com o
+      viewport entre um piso (mobile) e um teto (desktop), com clamp().
+      Isso é o que garante que #hl, #character e os textos sempre guardem a
+      mesma proporção entre si, em qualquer tamanho de tela.
+    */
 
     #hl{
         /* border: 1px solid green; */
         text-align: center;
-        font-size: 21em;
+        margin-top: 50px;
+        font-size: clamp(4rem, 24.6vw, 21rem);
+        line-height: 1;
         color: var(--text-title);
         font-family: Big Shoulders, sans-serif;
     }
@@ -188,9 +216,10 @@ header{
     #character{
         position: absolute;
         left: 50%;
-        top: 26%;
+        top: 10%;
         transform: translateX(-50%);
-        width: 860px;
+        width: clamp(220px, 48.4vw, 860px);
+        max-width: 90vw;
         z-index: 1;
     }
 
@@ -199,7 +228,7 @@ header{
         margin-top: 60px;
         display: flex;
         justify-content: space-between;
-        font-size: 3.9em;
+        font-size: clamp(1.2rem, 2.8vw + 0.55rem, 3.9rem);
         color: #eaeaec86;
         font-family: roboto, sans-serif;
 
@@ -210,7 +239,8 @@ header{
         #right, #left{
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: clamp(8px, 1.5vw, 20px);
+            min-width: 0;
         }
 
         .l4{
@@ -218,45 +248,96 @@ header{
         }
 
         #l1l{
-            transform: translateX(-290px);
+            transform: translateX(clamp(-290px, -13.01vw - 40.21px, -89px));
         }
 
         #l2l{
-            transform: translateX(-470px);
+            transform: translateX(clamp(-470px, -21.06vw - 65.62px, -144.6px));
         }
 
         #l3l{
-            transform: translateX(-500px);
+            transform: translateX(clamp(-500px, -22.41vw - 69.76px, -153.8px));
         }
 
         #l4l{
-            transform: translateX(-600px);
+            transform: translateX(clamp(-600px, -26.89vw - 83.76px, -184.6px));
         }
 
         #l1r{
-            transform: translateX(290px);
+            transform: translateX(clamp(89px, 13.01vw + 40.21px, 290px));
         }
 
         #l2r{
-            transform: translateX(470px);
+            transform: translateX(clamp(144.6px, 21.06vw + 65.62px, 470px));
         }
 
         #l3r{
-            transform: translateX(500px);
+            transform: translateX(clamp(153.8px, 22.41vw + 69.76px, 500px));
         }
 
         #l4r{
-            transform: translateX(600px);
+            transform: translateX(clamp(184.6px, 26.89vw + 83.76px, 600px));
         }
     }
 }
 
 @media (min-width: 1920px){
-    
+
     header{
         #hl{
-            font-size: 26em;
+            font-size: 26rem;
+        }
+
+        #character{
+            width: 1065px;
         }
     }
-    
+
+}
+
+/* ===== NAV MOBILE ===== */
+@media (max-width: 900px){
+
+    nav{
+        justify-content: space-between;
+
+        ul{
+            display: none;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100dvh;
+            flex-direction: column;
+            justify-content: center;
+            gap: 32px;
+            background-color: var(--background);
+            border-radius: 0;
+            padding: 24px;
+            z-index: 5;
+
+            &.active{
+                display: flex;
+            }
+        }
+
+        #github{
+            display: none;
+        }
+
+        #nav-toggle{
+            display: block;
+        }
+    }
+}
+
+/* ===== TELAS PEQUENAS: reduz espaçamentos gerais ===== */
+@media (max-width: 600px){
+
+    header{
+        margin-top: 12px;
+
+        #texts{
+            margin-top: 40px;
+        }
+    }
 }

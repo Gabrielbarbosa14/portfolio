@@ -1,3 +1,23 @@
+const navToggle = document.querySelector("#nav-toggle");
+const navList = document.querySelector("#nav-list");
+
+navToggle.addEventListener("click", () => {
+  const isOpen = navList.classList.toggle("active");
+  navToggle.setAttribute("aria-expanded", isOpen);
+  navToggle.innerHTML = isOpen
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
+});
+
+// fecha o menu ao clicar em um link (evita ficar aberto ao navegar)
+navList.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navList.classList.remove("active");
+    navToggle.setAttribute("aria-expanded", false);
+    navToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+  });
+});
+
 const smallBall = document.querySelector("#small-ball-div");
 const body = document.querySelector("body");
 
@@ -60,3 +80,22 @@ gsap.to(".right-text", {
     scrub: .4
   }
 })
+
+// O layout usa tamanhos fluidos (clamp/vw), então a altura do header muda
+// conforme a largura da tela. Isso faz o ScrollTrigger calcular start/end
+// errado se ele "nascer" com um valor desatualizado (ex: antes das fontes
+// carregarem, ou em telas muito largas e curtas, onde o texto já nasce
+// dentro da janela 68%-28%). Recalculamos nesses momentos:
+
+// 1. Depois que a página e as fontes web terminarem de carregar
+window.addEventListener("load", () => ScrollTrigger.refresh());
+if (document.fonts) {
+  document.fonts.ready.then(() => ScrollTrigger.refresh());
+}
+
+// 2. Ao redimensionar a janela (com debounce pra não recalcular a cada pixel)
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => ScrollTrigger.refresh(), 200);
+});
