@@ -61,41 +61,66 @@ smallBallsArray.forEach((ball, index) => {
   });
 });
 
-gsap.to(".left-text",  {
+gsap.fromTo(".text-left1", {
+  opacity: 0,
+  x: -900,
+},{
+  opacity: 1,
   x: 0,
+  duration: .8,
   scrollTrigger:{
-    trigger: ".right-text",
-    start: "top 68%",
-    end: "end 28%",
-    scrub: .4
+    trigger: ".text-left1",
+    // markers: true,
+    start: "top 88%",
+    end: "top 55%",
+    scrub: 2
   }
 })
 
-gsap.to(".right-text", {
+gsap.fromTo(".text-left2", {
+  opacity: 0,
+  x: -900,
+},{
+  opacity: 1,
   x: 0,
+  duration: .8,
   scrollTrigger:{
-    trigger: ".right-text",
-    start: "top 68%",
-    end: "end 28%",
-    scrub: .4
+    trigger: ".text-left2",
+    // markers: true,
+    start: "top 92%",
+    end: "top 59%",
+    scrub: 2
   }
 })
 
-// O layout usa tamanhos fluidos (clamp/vw), então a altura do header muda
-// conforme a largura da tela. Isso faz o ScrollTrigger calcular start/end
-// errado se ele "nascer" com um valor desatualizado (ex: antes das fontes
-// carregarem, ou em telas muito largas e curtas, onde o texto já nasce
-// dentro da janela 68%-28%). Recalculamos nesses momentos:
+gsap.fromTo(".text-right1", {
+  opacity: 0,
+  x: 900,
+},{
+  opacity: 1,
+  x: 0,
+  duration: .8,
+  scrollTrigger:{
+    trigger: ".text-right1",
+    // markers: true,
+    start: "top 90%",
+    end: "bottom 64%",
+    scrub: 2
+  }
+})
 
-// 1. Depois que a página e as fontes web terminarem de carregar
-window.addEventListener("load", () => ScrollTrigger.refresh());
-if (document.fonts) {
-  document.fonts.ready.then(() => ScrollTrigger.refresh());
-}
-
-// 2. Ao redimensionar a janela (com debounce pra não recalcular a cada pixel)
-let resizeTimeout;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => ScrollTrigger.refresh(), 200);
-});
+gsap.fromTo(".text-right2", {
+  opacity: 0,
+  x: 900,
+},{
+  opacity: 1,
+  x: 0,
+  duration: .8,
+  scrollTrigger:{
+    trigger: ".text-right2",
+    // markers: true,
+    start: "top 84%",
+    end: "top 51%",
+    scrub: 2
+  }
+})
