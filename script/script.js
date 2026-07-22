@@ -61,66 +61,100 @@ smallBallsArray.forEach((ball, index) => {
   });
 });
 
-gsap.fromTo(".text-left1", {
-  opacity: 0,
-  x: -900,
-},{
-  opacity: 1,
-  x: 0,
-  duration: .8,
-  scrollTrigger:{
-    trigger: ".text-left1",
-    // markers: true,
-    start: "top 88%",
-    end: "top 55%",
-    scrub: 2
-  }
-})
+// gsap.fromTo(".text-left1", {
+//   opacity: 0,
+//   x: "-100vw",
+// },{
+//   opacity: 1,
+//   x: 0,
+//   duration: .8,
+//   scrollTrigger:{
+//     trigger: ".text-left1",
+//     // markers: true,
+//     start: "top 88%",
+//     end: "top 55%",
+//     scrub: 2
+//   }
+// })
 
-gsap.fromTo(".text-left2", {
-  opacity: 0,
-  x: -900,
-},{
-  opacity: 1,
-  x: 0,
-  duration: .8,
-  scrollTrigger:{
-    trigger: ".text-left2",
-    // markers: true,
-    start: "top 92%",
-    end: "top 59%",
-    scrub: 2
-  }
-})
+// gsap.fromTo(".text-left2", {
+//   opacity: 0,
+//   x: "-100vw",
+// },{
+//   opacity: 1,
+//   x: 0,
+//   duration: .8,
+//   scrollTrigger:{
+//     trigger: ".text-left2",
+//     // markers: true,
+//     start: "top 92%",
+//     end: "top 59%",
+//     scrub: 2
+//   }
+// })
 
-gsap.fromTo(".text-right1", {
-  opacity: 0,
-  x: 900,
-},{
-  opacity: 1,
-  x: 0,
-  duration: .8,
-  scrollTrigger:{
-    trigger: ".text-right1",
-    // markers: true,
-    start: "top 90%",
-    end: "bottom 64%",
-    scrub: 2
-  }
-})
+// gsap.fromTo(".text-right1", {
+//   opacity: 0,
+//   x: "100vw",
+// },{
+//   opacity: 1,
+//   x: 0,
+//   duration: .8,
+//   scrollTrigger:{
+//     trigger: ".text-right1",
+//     // markers: true,
+//     start: "top 90%",
+//     end: "bottom 64%",
+//     scrub: 2
+//   }
+// })
 
-gsap.fromTo(".text-right2", {
-  opacity: 0,
-  x: 900,
-},{
-  opacity: 1,
-  x: 0,
-  duration: .8,
-  scrollTrigger:{
-    trigger: ".text-right2",
-    // markers: true,
-    start: "top 84%",
-    end: "top 51%",
-    scrub: 2
+// gsap.fromTo(".text-right2", {
+//   opacity: 0,
+//   x: "100vw",
+// },{
+//   opacity: 1,
+//   x: 0,
+//   duration: .8,
+//   scrollTrigger:{
+//     trigger: ".text-right2",
+//     // markers: true,
+//     start: "top 84%",
+//     end: "top 51%",
+//     scrub: 2
+//   }
+// })
+
+// 1. Criamos uma Timeline amarrada ao container pai (#texts)
+const textTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#texts",
+    start: "top 75%",  // A animação de TODOS começa quando o topo de #texts atinge 85% da tela
+    end: "top 20%", // A animação de TODOS termina quando o final de #texts atinge 60%
+    scrub: 2,
+    // markers: true, // Descomente para ver as linhas na tela e ajustar start/end visualmente
   }
-})
+});
+
+// 2. Adicionamos as animações na timeline usando 'vw' em vez de pixels fixos
+textTimeline
+  .fromTo(".text-left1", 
+    { opacity: 0, x: "-50%" }, 
+    { opacity: 1, x: 0}, 
+    0 // O '0' no final diz para essa animação começar no tempo 0 da timeline
+  )
+  .fromTo(".text-right1", 
+    { opacity: 0, x: "50%" }, 
+    { opacity: 1, x: 0}, 
+    0 // Como todas estão no tempo 0, elas entram perfeitamente sincronizadas
+  )
+  .fromTo(".text-left2", 
+    { opacity: 0, x: "-50%" }, 
+    { opacity: 1, x: 0}, 
+    0.1 // Se quiser que os de baixo entrem um milissegundo depois, mude para 0.1, 0.2, etc.
+  )
+  .fromTo(".text-right2", 
+    { opacity: 0, x: "50%" }, 
+    { opacity: 1, x: 0}, 
+    0.1
+  );

@@ -193,22 +193,14 @@ nav ul li a:hover span{
 
 header{
     /* border: 1px solid blue; */
-    margin-top: 22px;
+    margin-top: 3%;
     position: relative;
-
-    /*
-      Escala fluida: em vez de um valor fixo (que só "parece certo" em uma
-      largura de tela específica), cada elemento cresce/encolhe junto com o
-      viewport entre um piso (mobile) e um teto (desktop), com clamp().
-      Isso é o que garante que #hl, #character e os textos sempre guardem a
-      mesma proporção entre si, em qualquer tamanho de tela.
-    */
 
     #hl{
         /* border: 1px solid green; */
         text-align: center;
-        margin-top: 70px;
-        /* font-size: clamp(vw, 24.6vw, 21vw); */
+        /* margin-top: 3.4vw; */
+        margin-bottom: 5%;
         font-size: 21vw;
         line-height: 1;
         color: var(--text-title);
@@ -219,18 +211,19 @@ header{
     #character{
         position: absolute;
         left: 50%;
-        top: 10%;
+        top: 3vw;
         transform: translateX(-50%);
         width: 50vw;
         z-index: 1;
     }
 
     #texts{
-        /* border: 1px solid blue; */
-        margin-top: 350px;
+        /* border: 1px solid blue;  */
         color: white;
         font-size: 3.5vw;
         font-family: roboto, sans-serif;
+        position: relative;
+        height: 100vh;
 
         .text-left{
             margin-bottom: 50px;
