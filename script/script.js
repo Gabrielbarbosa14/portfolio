@@ -131,7 +131,7 @@ const textTimeline = gsap.timeline({
     trigger: "#texts",
     start: "top 75%",  // A animação de TODOS começa quando o topo de #texts atinge 85% da tela
     end: "top 20%", // A animação de TODOS termina quando o final de #texts atinge 60%
-    scrub: 2,
+    scrub: 1.8,
     // markers: true, // Descomente para ver as linhas na tela e ajustar start/end visualmente
   }
 });
@@ -139,22 +139,25 @@ const textTimeline = gsap.timeline({
 // 2. Adicionamos as animações na timeline usando 'vw' em vez de pixels fixos
 textTimeline
   .fromTo(".text-left1", 
-    { opacity: 0, x: "-50%" }, 
+    { opacity: 0, x: "-70%" }, 
     { opacity: 1, x: 0}, 
     0 // O '0' no final diz para essa animação começar no tempo 0 da timeline
   )
   .fromTo(".text-right1", 
-    { opacity: 0, x: "50%" }, 
+    { opacity: 0, x: "70%" }, 
     { opacity: 1, x: 0}, 
     0 // Como todas estão no tempo 0, elas entram perfeitamente sincronizadas
   )
   .fromTo(".text-left2", 
-    { opacity: 0, x: "-50%" }, 
+    { opacity: 0, x: "-70%" }, 
     { opacity: 1, x: 0}, 
     0.1 // Se quiser que os de baixo entrem um milissegundo depois, mude para 0.1, 0.2, etc.
   )
   .fromTo(".text-right2", 
-    { opacity: 0, x: "50%" }, 
+    { opacity: 0, x: "70%" }, 
     { opacity: 1, x: 0}, 
     0.1
   );
+
+  let copy = document.querySelector(".logos-slide").cloneNode(true)
+  document.querySelector(".logos").appendChild(copy)

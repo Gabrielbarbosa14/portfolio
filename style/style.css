@@ -21,7 +21,7 @@
 
 body{
     overflow-x: hidden;
-    background-color: var(--background);
+    background-color: #1C1C22;
 }
 
 #load-screen-div{
@@ -195,6 +195,7 @@ header{
     /* border: 1px solid blue; */
     margin-top: 3%;
     position: relative;
+    padding-bottom: 3vw;
 
     #hl{
         /* border: 1px solid green; */
@@ -223,7 +224,7 @@ header{
         font-size: 3.5vw;
         font-family: roboto, sans-serif;
         position: relative;
-        height: 100vh;
+        margin-top: 7%;
 
         .text-left{
             margin-bottom: 50px;
@@ -235,9 +236,34 @@ header{
             z-index: 2;
             position: relative;
         }
+    }
+}
 
-        .text-right, .text-left{
-            
+main{
+    .logos{
+        overflow: hidden;
+        background-color: var(--surface);
+        padding: 40px 0 ;
+        white-space: nowrap;
+        border: 1px solid white;
+        
+
+        .logos-slide{
+        animation: 15s slide infinite linear;
+        display: inline-block;
+
+        img{
+            height: 4.5vw;
+            margin: 0 40px;
         }
+    }
+    }
+}
+
+@keyframes slide {
+    from{
+        transform: translateX(0);
+    } to {
+        transform: translateX(-100%);
     }
 }
